@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Build a School — Kyle Zellner</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20rx%3D%277%27%20fill%3D%27%231479FF%27%2F%3E%3Ctext%20x%3D%2716%27%20y%3D%2723%27%20font-family%3D%27Helvetica%2CArial%2Csans-serif%27%20font-size%3D%2718%27%20font-weight%3D%27bold%27%20fill%3D%27%23ffffff%27%20text-anchor%3D%27middle%27%3EKZ%3C%2Ftext%3E%3C%2Fsvg%3E">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: '#0F1115',
+        paper: '#FFFFFF',
+        soft: '#F6F4F0',
+        accent: '#1479FF',
+        accent2: '#0F5FD1',
+        mute: '#5E6573',
+        line: '#E7E3DC',
+      },
+      fontFamily: {
+        head: ['Sora', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+      },
+    },
+  },
+};
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #FFFFFF; color: #0F1115; overflow-x: hidden; }
+  footer { padding-bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px)); }
+  @media (max-width: 640px) {
+    footer { padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px)); }
+  }
+  section[id] { scroll-margin-top: 72px; }
+  ::selection { background: #1479FF; color: #fff; }
+
+  .eyebrow { letter-spacing: .28em; }
+
+  .slot { position: relative; overflow: hidden; background:
+      repeating-linear-gradient(45deg,#F6F4F0,#F6F4F0 12px,#EFECE6 12px,#EFECE6 24px);
+      border: 1px solid #E7E3DC; }
+  .slot::after { content: attr(data-label); position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center; text-align:center;
+      color: #A39D93; font-family: 'Sora',sans-serif; font-weight:700; font-size: .8rem;
+      letter-spacing: .18em; padding: 1rem; pointer-events: none; }
+  .slot img { position: relative; width: 100%; height: 100%; object-fit: cover; display:block; }
+  .slot:has(img)::after { display: none; }
+
+  /* DRAFT placeholders — numbers that must come from the build partner. Remove before sending. */
+  .tbc { background: #FFF3BF; color: #8A5A00; border-radius: 4px; padding: 0 .3em; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  .navlink.active { color: #0F1115; }
+  .navlink.active::after { width: 100%; }
+  .navlink { position: relative; }
+  .navlink::after { content:''; position:absolute; left:0; bottom:-4px; height:1px; width:0; background:#1479FF; transition:width .3s ease; }
+
+  @media (max-width: 767px) {
+    .budget-note, .center-copy { text-align: left; }
+    #creators .slot { max-width: 280px; margin-left: auto; margin-right: auto; }
+    section { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+    #hero { padding-top: 7rem !important; }
+  }
+
+  @media print { .reveal { opacity:1 !important; transform:none !important; } .no-print{display:none;} }
+</style>
+</head>
+<body class="font-body antialiased">
+
+<!-- NAV -->
+<header class="no-print fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-white/80 border-b border-line">
+  <div class="max-w-6xl mx-auto px-6 h-[72px] flex items-center justify-between">
+    <a href="#hero" class="font-head font-extrabold tracking-tight text-sm inline-flex items-center min-h-[44px] pr-2">
+      <span class="text-accent">1win</span> <span class="text-mute font-semibold hidden sm:inline">&nbsp;× Build a School</span>
+    </a>
+    <nav class="hidden md:flex gap-7 text-sm text-mute font-medium">
+      <a href="#project" class="navlink hover:text-ink transition">The Project</a>
+      <a href="#school" class="navlink hover:text-ink transition">The School</a>
+      <a href="#branding" class="navlink hover:text-ink transition">Branding</a>
+      <a href="#budget" class="navlink hover:text-ink transition">Budget</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 1 · HERO -->
+<section id="hero" class="relative pt-36 md:pt-44 pb-16 md:pb-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="eyebrow uppercase text-accent text-xs font-semibold mb-4 reveal">A proposal for 1win</p>
+    <h1 class="font-head font-extrabold leading-[0.92] text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight reveal">
+      LET&rsquo;S BUILD<br>A SCHOOL<br>IN AFRICA.
+    </h1>
+    <p class="mt-8 text-lg md:text-2xl text-mute font-medium max-w-2xl reveal">You fund it. I build it and film every step, from the first brick to the first day of class.</p>
+    <div class="mt-12 reveal">
+      <div class="slot aspect-[4/3] md:aspect-[21/9] rounded-2xl" data-label="HERO"><img src="photos/hero.jpg" alt="Two schoolchildren smiling" style="object-position:50% 30%" onerror="this.remove()"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · THE PROJECT -->
+<section id="project" class="relative overflow-hidden py-14 md:py-20 bg-soft border-y border-line">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="eyebrow uppercase text-accent text-sm font-bold reveal">01 — The Project</p>
+    <h2 class="font-head font-extrabold text-4xl md:text-6xl tracking-tight max-w-3xl mt-3 reveal">One school. Start to finish. On camera.</h2>
+    <p class="mt-6 text-lg text-mute max-w-3xl reveal">I go to Nigeria and help build it.</p>
+
+    <div class="grid md:grid-cols-2 gap-4 mt-10">
+      <div class="reveal rounded-2xl border border-accent/40 bg-white overflow-hidden">
+        <div class="slot aspect-[16/9]"><img src="photos/ground.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="p-6">
+          <div class="text-accent text-xs eyebrow uppercase">On the ground</div>
+          <div class="font-head font-bold text-xl mt-1">Hands on, on site</div>
+          <p class="mt-2 text-sm text-mute leading-relaxed">I spend real time on the ground, helping build the school and overseeing the project from start to finish.</p>
+        </div>
+      </div>
+      <div class="reveal rounded-2xl border border-accent/40 bg-white overflow-hidden">
+        <div class="slot aspect-[16/9]"><img src="photos/camera.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="p-6">
+          <div class="text-accent text-xs eyebrow uppercase">On camera</div>
+          <div class="font-head font-bold text-xl mt-1">A videographer for the key weeks</div>
+          <p class="mt-2 text-sm text-mute leading-relaxed">I bring a videographer out for a few weeks to document the journey. I film the days in between myself.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
+      <div class="reveal rounded-xl border border-line bg-white p-5">
+        <div class="slot aspect-[4/3] rounded-lg mb-4 -mx-1"><img src="photos/community.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="text-accent text-xs eyebrow uppercase">01</div>
+        <div class="font-head font-bold mt-1">The community</div>
+        <p class="mt-2 text-sm text-mute leading-relaxed">Meet the kids, the teachers and the families. Where they learn today.</p>
+      </div>
+      <div class="reveal rounded-xl border border-line bg-white p-5">
+        <div class="slot aspect-[4/3] rounded-lg mb-4 -mx-1"><img src="photos/groundbreaking.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="text-accent text-xs eyebrow uppercase">02</div>
+        <div class="font-head font-bold mt-1">Groundbreaking</div>
+        <p class="mt-2 text-sm text-mute leading-relaxed">The first day on site. 1win is there from day one.</p>
+      </div>
+      <div class="reveal rounded-xl border border-line bg-white p-5">
+        <div class="slot aspect-[4/3] rounded-lg mb-4 -mx-1"><img src="photos/build.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="text-accent text-xs eyebrow uppercase">03</div>
+        <div class="font-head font-bold mt-1">The build</div>
+        <p class="mt-2 text-sm text-mute leading-relaxed">I work alongside the local builders. Walls, roof, classrooms.</p>
+      </div>
+      <div class="reveal rounded-xl border border-accent/40 bg-accent/5 p-5">
+        <div class="slot aspect-[4/3] rounded-lg mb-4 -mx-1"><img src="photos/reveal.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="text-accent text-xs eyebrow uppercase">04</div>
+        <div class="font-head font-bold mt-1">The reveal</div>
+        <p class="mt-2 text-sm text-mute leading-relaxed">The kids see their finished school for the first time.</p>
+      </div>
+      <div class="reveal rounded-xl border border-accent/40 bg-accent/5 p-5">
+        <div class="slot aspect-[4/3] rounded-lg mb-4 -mx-1"><img src="photos/opening.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="text-accent text-xs eyebrow uppercase">05</div>
+        <div class="font-head font-bold mt-1">Opening day</div>
+        <p class="mt-2 text-sm text-mute leading-relaxed">First bell, first class.</p>
+      </div>
+      <div class="reveal rounded-xl border border-accent/40 bg-accent/5 p-5">
+        <div class="slot aspect-[4/3] rounded-lg mb-4 -mx-1"><img src="photos/followup.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="text-accent text-xs eyebrow uppercase">06</div>
+        <div class="font-head font-bold mt-1">The follow-up</div>
+        <p class="mt-2 text-sm text-mute leading-relaxed">I come back months later to show the school full and running.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · THE SCHOOL -->
+<section id="school" class="relative overflow-hidden py-14 md:py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="eyebrow uppercase text-accent text-sm font-bold reveal">02 — The School</p>
+    <h2 class="font-head font-extrabold text-3xl md:text-5xl tracking-tight max-w-3xl mt-3 reveal">Built with a partner who has done it before.</h2>
+    <p class="mt-6 text-lg text-mute max-w-3xl reveal">Our build partner has delivered <span class="text-ink font-semibold">eight schools across Kenya, Ghana, Nigeria, Rwanda and Uganda since 2024.</span> They run the construction on the ground.</p>
+
+    <div class="grid sm:grid-cols-3 gap-4 mt-12">
+      <div class="reveal rounded-xl border border-line p-6">
+        <div class="text-accent text-xs eyebrow uppercase">Country</div>
+        <div class="font-head font-extrabold text-3xl mt-2">Nigeria</div>
+      </div>
+      <div class="reveal rounded-xl border border-line p-6">
+        <div class="text-accent text-xs eyebrow uppercase">Build time</div>
+        <div class="font-head font-extrabold text-3xl mt-2">3&ndash;4 months</div>
+      </div>
+      <div class="reveal rounded-xl border border-line p-6">
+        <div class="text-accent text-xs eyebrow uppercase">Type</div>
+        <div class="font-head font-extrabold text-3xl mt-2">New build</div>
+      </div>
+    </div>
+
+    <div class="mt-12 reveal">
+      <div class="slot aspect-[3/2] md:aspect-[21/9] rounded-2xl" data-label="SCHOOL"><img src="photos/school.jpg" alt="A finished school building" loading="lazy" onerror="this.remove()"></div>
+      <p class="mt-3 text-xs text-mute">Photos throughout: schools previously delivered by our build partner.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · BRANDING -->
+<section id="branding" class="relative overflow-hidden py-14 md:py-20 bg-soft border-y border-line">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="eyebrow uppercase text-accent text-sm font-bold reveal">03 — Branding</p>
+    <h2 class="font-head font-extrabold text-3xl md:text-5xl tracking-tight max-w-3xl mt-3 reveal">1win, there from the first brick.</h2>
+    <div class="mt-12 max-w-2xl reveal">
+      <ul class="space-y-1.5 text-base text-mute list-disc pl-5 marker:text-accent">
+        <li>Branded on screen in every episode, start to finish</li>
+        <li>Tagged as a collab on every post</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · BUDGET -->
+<section id="budget" class="relative overflow-hidden py-14 md:py-20 bg-soft border-y border-line">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="eyebrow uppercase text-accent text-sm font-bold reveal">04 &mdash; Budget</p>
+    <div class="mt-10 max-w-3xl mx-auto">
+      <div class="reveal rounded-2xl border border-accent/40 bg-white p-10 md:p-12 text-center">
+        <div class="font-head font-bold text-lg">Build a School</div>
+        <div class="font-head font-extrabold text-6xl md:text-7xl text-accent mt-4">$145,000</div>
+        <p class="mt-5 text-ink/80 text-lg">One flat fee. Everything is inside it.</p>
+        <ul class="mt-10 grid sm:grid-cols-2 gap-x-10 gap-y-3 text-left text-sm text-mute list-disc pl-5 marker:text-accent">
+          <li>The full school build, run by our partner on the ground</li>
+          <li>Materials, labour and local permits</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · THE CREATORS -->
+<section id="creators" class="relative overflow-hidden py-14 md:py-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="eyebrow uppercase text-accent text-sm font-bold reveal">05 — The Creators</p>
+    <div class="grid sm:grid-cols-2 gap-6 mt-12 max-w-4xl">
+      <div class="reveal rounded-2xl border border-line bg-white p-6">
+        <div class="slot aspect-[4/5] rounded-xl" data-label="KYLE ZELLNER"><img src="photos/kyle.jpg" alt="Kyle Zellner" onerror="this.remove()"></div>
+        <div class="font-head font-extrabold text-2xl md:text-3xl tracking-tight mt-6">Kyle Zellner</div>
+        <div class="mt-4 flex flex-wrap gap-3">
+            <a href="https://www.instagram.com/kyle.zellner/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full border border-line hover:border-accent/60 hover:text-ink transition px-5 min-h-[44px] text-sm text-mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg> @kyle.zellner</a>
+            <a href="https://www.facebook.com/people/Kylezellner/61590668937779/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full border border-line hover:border-accent/60 hover:text-ink transition px-5 min-h-[44px] text-sm text-mute"><svg viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M14 9h2.5V6H14c-2.2 0-3.5 1.4-3.5 3.6V11H8.5v3h2V22h3v-8h2.3l.7-3h-3V9.8c0-.6.2-.8.5-.8z"/></svg> Facebook</a>
+        </div>
+      </div>
+      <div class="reveal rounded-2xl border border-line bg-white p-6">
+        <div class="slot aspect-[4/5] rounded-xl" data-label="CALLIE ROUNDS"><img src="photos/callie.jpg" alt="Callie Rounds" onerror="this.remove()"></div>
+        <div class="font-head font-extrabold text-2xl md:text-3xl tracking-tight mt-6">Callie Rounds</div>
+        <div class="mt-4 flex flex-wrap gap-3">
+            <a href="https://www.instagram.com/callie.rounds/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full border border-line hover:border-accent/60 hover:text-ink transition px-5 min-h-[44px] text-sm text-mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg> @callie.rounds</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative overflow-hidden py-14 md:py-20 border-t border-line bg-soft text-center">
+  <div class="relative max-w-3xl mx-auto px-6">
+    <p class="font-head font-extrabold text-2xl md:text-3xl tracking-tight reveal">Kyle Zellner</p>
+    <p class="text-mute mt-3 reveal"><a href="mailto:kylezellner2@gmail.com" class="text-accent hover:underline inline-flex items-center min-h-[44px] px-2">kylezellner2@gmail.com</a></p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  const revealAll = () => document.querySelectorAll('.reveal').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in'); else io.observe(el);
+  });
+  revealAll();
+  window.addEventListener('load', revealAll);
+
+  const links = [...document.querySelectorAll('.navlink')];
+  const map = links.map(l => ({ l, sec: document.querySelector(l.getAttribute('href')) })).filter(x => x.sec);
+  function updateActiveNav() {
+    let current = null;
+    for (const m of map) if (m.sec.getBoundingClientRect().top <= 90) current = m;
+    links.forEach(l => l.classList.remove('active'));
+    if (current) current.l.classList.add('active');
+  }
+  updateActiveNav();
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+</script>
+</body>
+</html>
